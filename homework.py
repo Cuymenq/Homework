@@ -25,21 +25,42 @@
 # print(check)
 
 # Get first prime numbers up to 100
-# Number = 1
 
-# while (Number <= 100):
-#     count = 0
-#     i = 2
+def get_prime(num):
 
-#     while (i <= Number//2):
-#         if (Number % i == 0):
-#             count = count + 1
-#             break
-#         i = i + 1
+    # Create a list to contain the prime numbers up to num
+    primes = []
 
-#     if (count == 0 and Number != 1):
-#         print(" %d" % Number)
+    # Assume that all numbers in the range up to num are prime,
+    # unless proven to be not prime.
+    is_prime = True
 
+    # Test all numbers in range(1, num)
+    for i in range(1,num):
+        # Test all numbers in range of 2 to i//2+1
+        # If a number is not divisble by any number up to
+        # half of its own size, it will not be a prime number.
+        # This is somewhat brute force...
+        for j in range(2, i//2+1):
+            if i % j == 0:
+                # if i is divisble by j, i can't be a prime number.
+                # Therefore, is_prime = False.
+                is_prime = False
+                break
+        if is_prime == True:
+            # If i was proven to be prime, append it to the
+            # list of primes.
+            primes.append(i)
+        else:
+            # If I was proven to not be prime, reset is_prime
+            # to equal true so it will be ready for the next loop.
+            is_prime = True
+
+    print(primes) # Print the primes list to the console
+    return primes # Return the primes list in a functional manner.
+
+get_prime(100) # Test the get_prime() function on 100.
+        
 
 # Take in a users input for their age, if they are younger than 18 print kids, if they're 18 to 65 print adults, else print seniors
 
